@@ -1,0 +1,117 @@
+Microsoft Windows [Version 10.0.19041.572]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\WINDOWS\system32>cd ..
+
+C:\Windows>cd ..
+
+C:\>cd Cassandra
+
+C:\Cassandra>cd bin
+The system cannot find the path specified.
+
+C:\Cassandra>cd apache-cassandra-3.11.8
+
+C:\Cassandra\apache-cassandra-3.11.8>cd bin
+
+C:\Cassandra\apache-cassandra-3.11.8\bin>cqlsh
+
+WARNING: console codepage must be set to cp65001 to support utf-8 encoding on Windows platforms.
+If you experience encoding problems, change your console codepage with 'chcp 65001' before starting cqlsh.
+
+Connected to Test Cluster at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 3.11.8 | CQL spec 3.4.4 | Native protocol v4]
+Use HELP for help.
+WARNING: pyreadline dependency missing.  Install to enable tab completion.
+cqlsh> CREATE KEYSPACE Library WITH replication = {'class':'SimpleStrategy','replication_factor':3};
+AlreadyExists: Keyspace 'library' already exists
+cqlsh> CREATE KEYSPACE Lib WITH replication = {'class':'SimpleStrategy','replication_factor':3};
+cqlsh> CREATE COLUMNFAMILY library_info(stud_id uuid, counter_value counter, stud_name VARCHAR, book_name VARCHAR, book_id INT, DOI VARCHAR, PRIMARY KEY(stud_id,stud_name,book_name,book_id,doi));
+InvalidRequest: Error from server: code=2200 [Invalid query] message="No keyspace has been specified. USE a keyspace, or explicitly specify keyspace.tablename"
+cqlsh> use Lib
+   ... ;
+cqlsh:lib> CREATE COLUMNFAMILY library_info(stud_id uuid, counter_value counter, stud_name VARCHAR, book_name VARCHAR, book_id INT, DOI VARCHAR, PRIMARY KEY(stud_id,stud_name,book_name,book_id,doi));
+cqlsh:lib> UPDATE library_info set counter_value=counter_value+1 where stud_id=uuid() and stud_name='Srishti' and book_name='ABC' and book_id=1 and doi='01/01/2020';
+cqlsh:lib> UPDATE library_info set counter_value=counter_value+1 where stud_id=uuid() and stud_name='Shubham' and book_name='XYZ' and book_id=2 and doi='01/05/2020';
+cqlsh:lib> select * from library_info ;
+
+ stud_id                              | stud_name | book_name | book_id | doi        | counter_value
+--------------------------------------+-----------+-----------+---------+------------+---------------
+ 0bd13d86-d404-4e6e-9f6f-75faaa58d016 |   Srishti |       ABC |       1 | 01/01/2020 |             1
+ 599c9c47-ce61-485d-8767-91e3b9649a3c |   Shubham |       XYZ |       2 | 01/05/2020 |             1
+
+(2 rows)
+cqlsh:lib> COPY library_info (stud_id , counter_value , stud_name , book_name , book_id , doi ) TO 'C:\Users\lenovo\Desktop\res.csv' WITH HEADER=TRUE;
+Using 3 child processes
+
+Starting copy of lib.library_info with columns [stud_id, counter_value, stud_name, book_name, book_id, doi].
+Processed: 2 rows; Rate:       3 rows/s; Avg. rate:       1 rows/s
+2 rows exported to 1 files in 3.574 seconds.
+cqlsh:lib> COPY library_info (stud_id , counter_value , stud_name , book_name , book_id , doi ) FROM 'C:\Users\lenovo\Desktop\res.csv' WITH HEADER=TRUE;
+Using 3 child processes
+
+Starting copy of lib.library_info with columns [stud_id, counter_value, stud_name, book_name, book_id, doi].
+PProcess ImportProcess-6:      1 rows/s; Avg. rate:       1 rows/s
+rocess ImportProcess-4:
+PTrocess ImportProcess-5:
+Traceback (most recent call last):
+Traceback (most recent call last):
+ raceback (most recent call last):
+  File "C:\Python27\lib\multiprocessing\process.py", line 267, in _bootstrap
+  File "C:\Python27\lib\multiprocessing\process.py", line 267, in _bootstrap
+ File "C:\Python27\lib\multiprocessing\process.py", line 267, in _bootstrap
+     self.run()
+     self.run()
+   self.run()
+ File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\pylib\cqlshlib\copyutil.py", line 2328, in run
+   File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\pylib\cqlshlib\copyutil.py", line 2328, in run
+ File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\pylib\cqlshlib\copyutil.py", line 2328, in run
+    self.close()
+     self.close()
+  File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\pylib\cqlshlib\copyutil.py", line 2332, in close
+    self.close()
+     self._session.cluster.shutdown()
+ File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\pylib\cqlshlib\copyutil.py", line 2332, in close
+ File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\pylib\cqlshlib\copyutil.py", line 2332, in close
+   File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\lib\cassandra-driver-internal-only-3.11.0-bb96859b.zip\cassandra-driver-3.11.0-bb96859b\cassandra\cluster.py", line 1259, in shutdown
+    self._session.cluster.shutdown()
+   self._session.cluster.shutdown()
+   File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\lib\cassandra-driver-internal-only-3.11.0-bb96859b.zip\cassandra-driver-3.11.0-bb96859b\cassandra\cluster.py", line 1259, in shutdown
+ File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\lib\cassandra-driver-internal-only-3.11.0-bb96859b.zip\cassandra-driver-3.11.0-bb96859b\cassandra\cluster.py", line 1259, in shutdown
+     self.control_connection.shutdown()
+   self.control_connection.shutdown()
+   File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\lib\cassandra-driver-internal-only-3.11.0-bb96859b.zip\cassandra-driver-3.11.0-bb96859b\cassandra\cluster.py", line 2850, in shutdown
+   File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\lib\cassandra-driver-internal-only-3.11.0-bb96859b.zip\cassandra-driver-3.11.0-bb96859b\cassandra\cluster.py", line 2850, in shutdown
+   self.control_connection.shutdown()
+   self._connection.close()
+      self._connection.close()
+ File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\lib\cassandra-driver-internal-only-3.11.0-bb96859b.zip\cassandra-driver-3.11.0-bb96859b\cassandra\cluster.py", line 2850, in shutdown
+ File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\lib\cassandra-driver-internal-only-3.11.0-bb96859b.zip\cassandra-driver-3.11.0-bb96859b\cassandra\io\asyncorereactor.py", line 373, in close
+   File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\lib\cassandra-driver-internal-only-3.11.0-bb96859b.zip\cassandra-driver-3.11.0-bb96859b\cassandra\io\asyncorereactor.py", line 373, in close
+   self._connection.close()
+   File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\lib\cassandra-driver-internal-only-3.11.0-bb96859b.zip\cassandra-driver-3.11.0-bb96859b\cassandra\io\asyncorereactor.py", line 373, in close
+    AsyncoreConnection.create_timer(0, partial(asyncore.dispatcher.close, self))
+   AsyncoreConnection.create_timer(0, partial(asyncore.dispatcher.close, self))
+      AsyncoreConnection.create_timer(0, partial(asyncore.dispatcher.close, self))
+ File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\lib\cassandra-driver-internal-only-3.11.0-bb96859b.zip\cassandra-driver-3.11.0-bb96859b\cassandra\io\asyncorereactor.py", line 335, in create_timer
+ File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\lib\cassandra-driver-internal-only-3.11.0-bb96859b.zip\cassandra-driver-3.11.0-bb96859b\cassandra\io\asyncorereactor.py", line 335, in create_timer
+      cls._loop.add_timer(timer)
+   cls._loop.add_timer(timer)
+ File "C:\Cassandra\apache-cassandra-3.11.8\bin\..\lib\cassandra-driver-internal-only-3.11.0-bb96859b.zip\cassandra-driver-3.11.0-bb96859b\cassandra\io\asyncorereactor.py", line 335, in create_timer
+AAttributeError: 'NoneType' object has no attribute 'add_timer'
+ ttributeError: 'NoneType' object has no attribute 'add_timer'
+   cls._loop.add_timer(timer)
+AttributeError: 'NoneType' object has no attribute 'add_timer'
+Processed: 2 rows; Rate:       0 rows/s; Avg. rate:       1 rows/s
+2 rows imported from 1 files in 3.288 seconds (0 skipped).
+cqlsh:lib> SELECT * from libraryinfo where counter_value=2 ALLOW FILTERING;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="unconfigured table libraryinfo"
+cqlsh:lib> SELECT * from library_info where counter_value=2 ALLOW FILTERING;
+
+ stud_id                              | stud_name | book_name | book_id | doi        | counter_value
+--------------------------------------+-----------+-----------+---------+------------+---------------
+ 0bd13d86-d404-4e6e-9f6f-75faaa58d016 |   Srishti |       ABC |       1 | 01/01/2020 |             2
+ 599c9c47-ce61-485d-8767-91e3b9649a3c |   Shubham |       XYZ |       2 | 01/05/2020 |             2
+
+(2 rows)
+cqlsh:lib>
